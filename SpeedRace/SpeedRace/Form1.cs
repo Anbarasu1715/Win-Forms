@@ -20,15 +20,18 @@ namespace SpeedRace
         private List<Color> carColors = new List<Color> { Color.Red, Color.Blue, Color.Green, Color.Black };
         private List<int> carNum = new List<int> {1,2,3,4};
         private int colorIndex=0;
+        CarSpec carSpec=new CarSpec();
+
 
         public Form1()
         {
             InitializeComponent();
+            carSpec.Visible = false;
             KeyPreview = true;
             this.ActiveControl = racingTrackPanel;
             racingTrackPanel.Focus();
-            userControl11.OnControlClicked += UserControl11_OnControlClicked;
-            userControl12.OnControlClicked += UserControl11_OnControlClicked;
+            //userControl11.OnControlClicked += UserControl11_OnControlClicked;
+            //userControl12.OnControlClicked += UserControl11_OnControlClicked;
 
         }  
 
@@ -50,6 +53,9 @@ namespace SpeedRace
         
         private void addCarBtn_Click(object sender, EventArgs e)
         {
+            carSpec.Visible=true;
+            racingTrackPanel.Controls.Add(carSpec);
+            carSpec.Location = new Point(23,150);
             if (carCount < 4)
             {
                 Button button = new Button
@@ -76,7 +82,9 @@ namespace SpeedRace
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            carSpec.Visible = false;
             Rectangle racingtrack = new Rectangle(racingTrackPanel.Location.X, racingTrackPanel.Location.Y, racingTrackPanel.Width, racingTrackPanel.Height);
+
         }
 
         
@@ -224,6 +232,7 @@ namespace SpeedRace
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
+            carSpec.Visible= false;
             for (int i = 0; i < cars.Count; i++)
             {
                 if (i < carDefaultPosition.Count)
@@ -245,6 +254,16 @@ namespace SpeedRace
             line.DrawLine(pen, 145+360, 0, 145+360, 730);
             pen.Dispose();
             line.Dispose();
+        }
+
+        private void userControl11_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void carSpec1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

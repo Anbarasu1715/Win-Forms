@@ -22,3 +22,4 @@ C:\Users\anbar\source\repos\Win-Forms\SpeedRace\SpeedRace\obj\Debug\SpeedRace.cs
 C:\Users\anbar\source\repos\Win-Forms\SpeedRace\SpeedRace\obj\Debug\SpeedRace.csproj.CoreCompileInputs.cache
 C:\Users\anbar\source\repos\Win-Forms\SpeedRace\SpeedRace\obj\Debug\SpeedRace.exe
 C:\Users\anbar\source\repos\Win-Forms\SpeedRace\SpeedRace\obj\Debug\SpeedRace.pdb
+C:\Users\anbar\source\repos\Win-Forms\SpeedRace\SpeedRace\obj\Debug\SpeedRace.CarSpec.resources

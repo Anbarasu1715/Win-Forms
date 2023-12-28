@@ -63,6 +63,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserControl1";
             this.Size = new System.Drawing.Size(383, 187);
+            this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
