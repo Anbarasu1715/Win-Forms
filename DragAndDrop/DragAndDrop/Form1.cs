@@ -18,7 +18,7 @@ namespace DragAndDrop
         public Form1()
         {
             InitializeComponent();
-            
+            displayTP.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
 
             btn1.MouseDown+=MouseDown;
             btn2.MouseDown += MouseDown;
@@ -42,6 +42,10 @@ namespace DragAndDrop
         {
             Button btn = sender as Button;
             Point CurrentLocation = displayTP.PointToClient(btn.PointToScreen(new Point(0, 0)));
+            int x = CurrentLocation.X / 139;
+            int y = CurrentLocation.Y / 53;
+            textBox1.Text = "" +x+"    "+y;
+            displayTP.Controls.Add(btn,x,y);
 
         }
 
@@ -55,6 +59,7 @@ namespace DragAndDrop
             {
                 (sender as Button).Left += e.X - startPoint.X;
                 (sender as Button).Top += e.Y - startPoint.Y;
+                textBox1.Text = "" + displayTP.PointToClient((sender as Button).PointToScreen(new Point(0, 0)));
             }
         }
 
