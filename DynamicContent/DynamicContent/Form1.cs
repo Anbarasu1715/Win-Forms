@@ -37,6 +37,7 @@ namespace DynamicContent
         private Rectangle recAddBtn;
         private Rectangle recRemBtn;
         private Rectangle recWidthTB;
+        private Rectangle recWLbl;
         
 
 
@@ -75,6 +76,7 @@ namespace DynamicContent
             recAddBtn = new Rectangle(addBtn.Location,addBtn.Size);
             recRemBtn = new Rectangle(removeBtn.Location,removeBtn.Size);
             recWidthTB = new Rectangle(widthTB.Location,widthTB.Size);
+            recWLbl = new Rectangle(wLbl.Location,wLbl.Size);
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -87,6 +89,7 @@ namespace DynamicContent
             resizeControl(addBtn, recAddBtn);
             resizeControl(removeBtn, recRemBtn);
             resizeControl(widthTB, recWidthTB);
+            resizeControl(wLbl,recWLbl);
         }
 
         private void resizeControl(Control control, Rectangle rec)
@@ -101,7 +104,7 @@ namespace DynamicContent
             int newHeight = (int)(rec.Height*YRatio);
 
             control.Location = new System.Drawing.Point(newX,newY);
-            //control.Size = new System.Drawing.Size(newWidth,newHeight);
+            control.Size = new System.Drawing.Size(newWidth,newHeight);
         }
 
         private void resizeControl(Rectangle control, Rectangle rec) {
@@ -302,10 +305,6 @@ namespace DynamicContent
                 displayPanel.Controls.Add(Shape);
                 Shape.Size = new System.Drawing.Size(width, displayPanel.Height);
                 Shape.BackColor = Color.FromName(((Colors)(ctr++ % 5)).ToString());
-
-                
-
-
 
                 shapeList.Add(Shape);
                 int RowCount = GetRowCount();
