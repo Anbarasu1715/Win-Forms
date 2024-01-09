@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.displayTP = new System.Windows.Forms.TableLayoutPanel();
             this.btn4 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,14 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(834, 561);
             this.panel2.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(609, 465);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(193, 44);
+            this.textBox1.TabIndex = 4;
             // 
             // displayTP
             // 
@@ -77,51 +85,47 @@
             this.displayTP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.displayTP.Size = new System.Drawing.Size(834, 424);
             this.displayTP.TabIndex = 1;
+            this.displayTP.MouseMove += new System.Windows.Forms.MouseEventHandler(this.displayTP_MouseMove_1);
             // 
             // btn4
             // 
+            this.btn4.BackColor = System.Drawing.Color.SpringGreen;
             this.btn4.Location = new System.Drawing.Point(417, 423);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(140, 138);
             this.btn4.TabIndex = 3;
             this.btn4.Text = "FOUR";
-            this.btn4.UseVisualStyleBackColor = true;
+            this.btn4.UseVisualStyleBackColor = false;
             // 
             // btn3
             // 
+            this.btn3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btn3.Location = new System.Drawing.Point(278, 423);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(140, 138);
             this.btn3.TabIndex = 2;
             this.btn3.Text = "THREE";
-            this.btn3.UseVisualStyleBackColor = true;
+            this.btn3.UseVisualStyleBackColor = false;
             // 
             // btn2
             // 
+            this.btn2.BackColor = System.Drawing.Color.Gold;
             this.btn2.Location = new System.Drawing.Point(139, 423);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(140, 138);
             this.btn2.TabIndex = 1;
             this.btn2.Text = "TWO";
-            this.btn2.UseVisualStyleBackColor = true;
-            this.btn2.Click += new System.EventHandler(this.btn2_Click);
+            this.btn2.UseVisualStyleBackColor = false;
             // 
             // btn1
             // 
+            this.btn1.BackColor = System.Drawing.Color.Red;
             this.btn1.Location = new System.Drawing.Point(0, 423);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(140, 138);
             this.btn1.TabIndex = 0;
             this.btn1.Text = "  ONE";
-            this.btn1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(609, 465);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(193, 44);
-            this.textBox1.TabIndex = 4;
+            this.btn1.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
