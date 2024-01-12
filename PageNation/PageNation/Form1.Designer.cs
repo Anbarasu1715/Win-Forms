@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.containerPanel = new System.Windows.Forms.Panel();
+            this.previewpanel = new System.Windows.Forms.Panel();
+            this.nextBtn = new System.Windows.Forms.Button();
+            this.prevBtn = new System.Windows.Forms.Button();
             this.totalTB = new System.Windows.Forms.TextBox();
             this.previewTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.createBtn = new System.Windows.Forms.Button();
-            this.prevBtn = new System.Windows.Forms.Button();
-            this.nextBtn = new System.Windows.Forms.Button();
-            this.previewpanel = new System.Windows.Forms.Panel();
             this.warnlbl = new System.Windows.Forms.Label();
             this.showLbl = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.containerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // containerPanel
@@ -52,6 +54,39 @@
             this.containerPanel.Name = "containerPanel";
             this.containerPanel.Size = new System.Drawing.Size(1000, 100);
             this.containerPanel.TabIndex = 0;
+            // 
+            // previewpanel
+            // 
+            this.previewpanel.Location = new System.Drawing.Point(80, 0);
+            this.previewpanel.Name = "previewpanel";
+            this.previewpanel.Size = new System.Drawing.Size(850, 100);
+            this.previewpanel.TabIndex = 2;
+            // 
+            // nextBtn
+            // 
+            this.nextBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.nextBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextBtn.ForeColor = System.Drawing.Color.Blue;
+            this.nextBtn.Location = new System.Drawing.Point(952, 34);
+            this.nextBtn.Name = "nextBtn";
+            this.nextBtn.Size = new System.Drawing.Size(43, 31);
+            this.nextBtn.TabIndex = 1;
+            this.nextBtn.Text = ">";
+            this.nextBtn.UseVisualStyleBackColor = false;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
+            // 
+            // prevBtn
+            // 
+            this.prevBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.prevBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prevBtn.ForeColor = System.Drawing.Color.Blue;
+            this.prevBtn.Location = new System.Drawing.Point(10, 34);
+            this.prevBtn.Name = "prevBtn";
+            this.prevBtn.Size = new System.Drawing.Size(43, 31);
+            this.prevBtn.TabIndex = 0;
+            this.prevBtn.Text = "<";
+            this.prevBtn.UseVisualStyleBackColor = false;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
             // 
             // totalTB
             // 
@@ -101,39 +136,6 @@
             this.createBtn.Text = "Create";
             this.createBtn.UseVisualStyleBackColor = true;
             // 
-            // prevBtn
-            // 
-            this.prevBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.prevBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prevBtn.ForeColor = System.Drawing.Color.Blue;
-            this.prevBtn.Location = new System.Drawing.Point(10, 34);
-            this.prevBtn.Name = "prevBtn";
-            this.prevBtn.Size = new System.Drawing.Size(43, 31);
-            this.prevBtn.TabIndex = 0;
-            this.prevBtn.Text = "<";
-            this.prevBtn.UseVisualStyleBackColor = false;
-            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
-            // 
-            // nextBtn
-            // 
-            this.nextBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.nextBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nextBtn.ForeColor = System.Drawing.Color.Blue;
-            this.nextBtn.Location = new System.Drawing.Point(952, 34);
-            this.nextBtn.Name = "nextBtn";
-            this.nextBtn.Size = new System.Drawing.Size(43, 31);
-            this.nextBtn.TabIndex = 1;
-            this.nextBtn.Text = ">";
-            this.nextBtn.UseVisualStyleBackColor = false;
-            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
-            // 
-            // previewpanel
-            // 
-            this.previewpanel.Location = new System.Drawing.Point(80, 0);
-            this.previewpanel.Name = "previewpanel";
-            this.previewpanel.Size = new System.Drawing.Size(850, 100);
-            this.previewpanel.TabIndex = 2;
-            // 
             // warnlbl
             // 
             this.warnlbl.AutoSize = true;
@@ -154,11 +156,21 @@
             this.showLbl.Size = new System.Drawing.Size(0, 25);
             this.showLbl.TabIndex = 7;
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Location = new System.Drawing.Point(300, 121);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(400, 186);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox.TabIndex = 8;
+            this.pictureBox.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 597);
+            this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.showLbl);
             this.Controls.Add(this.warnlbl);
             this.Controls.Add(this.createBtn);
@@ -170,6 +182,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.containerPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +201,7 @@
         private System.Windows.Forms.Panel previewpanel;
         private System.Windows.Forms.Label warnlbl;
         private System.Windows.Forms.Label showLbl;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }
 

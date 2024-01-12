@@ -19,7 +19,12 @@ namespace PageNation
         private int pointCount = 0;
         private int previewCount;
         private int totalCount;
+        private bool startIsPresent = false, endIspresent = false;
+        private Button startBtn, endBtn;
 
+        //private List<PictureShop> picData = new List<PictureShop>();
+        private Dictionary<int, PictureShop> picData = new Dictionary<int, PictureShop>();
+        private List<string> pics = new List<string>();
 
         private delegate void Buttonclick(Object sender,int n);
         private event Buttonclick onButtonClick;
@@ -29,6 +34,12 @@ namespace PageNation
             InitializeComponent();
             createBtn.Click += createButtons;
             onButtonClick += showBtnName;
+
+            pics.Add("D:/pageiNation/pic1.jpg");
+            pics.Add("D:/pageiNation/pic2.jpg");
+            pics.Add("D:/pageiNation/pic3.jpg");
+            pics.Add("D:/pageiNation/pic4.jpg");
+            pics.Add("D:/pageiNation/pic5.jpg");
         }
 
         public enum CustomColors
@@ -66,7 +77,7 @@ namespace PageNation
                 case CustomColors.White:
                     return Color.White;
                 default:
-                    return Color.Black; 
+                    return Color.Tomato; 
             }
         }
 
@@ -81,13 +92,53 @@ namespace PageNation
             //}
         }
 
+        private void indexBtnClick(Object sender,EventArgs e) {
+            if ((sender as Button).Name == "startBtn")
+            {
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    buttons[i].Text = (i + 1) + "";
+                }
+                pointCount = 1;
+                btnIndex = 0;
+                if (startIsPresent)
+                {
+                    previewpanel.Controls.Remove(startBtn);
+                    startIsPresent = false;
+                }
+                endBtn.Visible = true;
+
+                buttons[0].Focus();
+                picfocus();
+            }
+            else {
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    buttons[i].Text = (totalCount-previewCount+i+1) + "";
+                }
+                pointCount = totalCount;
+                btnIndex = buttons.Count-1;
+                endBtn.Visible = false;
+                if (!startIsPresent)
+                {
+                    previewpanel.Controls.Add(startBtn);
+                    startIsPresent = true;
+                }
+                buttons[buttons.Count-1].Focus();
+                picfocus();
+            }
+        }
+
         private void showBtnName(Object sender, int n) {
             showLbl.Text = "Current Page Point is " +n;
         }
 
         private void btnClick(Object sender, EventArgs e) {
             if (int.TryParse((sender as Button)?.Text, out int result))
+            {
                 onButtonClick?.Invoke(sender, result);
+                picfocus();
+            }
             else
                 showLbl.Text = "Not Pointing to Index";
 
@@ -102,17 +153,28 @@ namespace PageNation
 
 
         private void createButtons(Object sender,EventArgs e) {
+            startIsPresent = false;
             clearControls();
             previewCount = int.Parse(previewTB.Text);
             totalCount = int.Parse(totalTB.Text);
+
+            for (int i=0;i<totalCount;i++) {
+                PictureShop shop = new PictureShop();
+                shop.id = i + 1;
+                shop.Location = pics[i % 5];
+                picData[i + 1] = shop;
+                picData[i + 1] = shop;
+            }
+
+
             int width = 65;
             int height = 35;
             int x =(previewpanel.Width-((previewCount*width)+(previewCount-1)*5))/2; 
             int y = 30;
 
-            if (previewCount <= 10 && previewCount > 0) {
+            if (previewCount <= 10 && previewCount > 0 && previewCount<=totalCount) {
                 warnlbl.Text = "";
-                if (totalCount <= 1000000000000000)
+                if (totalCount <= 10000000)
                 {
                     for (int i = 0; i < previewCount; i++)
                     {
@@ -128,55 +190,110 @@ namespace PageNation
                         previewpanel.Controls.Add(newBtn);
                         buttons.Add(newBtn);
                     }
+                    
+
+                    endBtn = new Button()
+                    {
+                        Text = "...",
+                        BackColor = GetColor(9),
+                        Location = new Point(x, y),
+                        Size = new Size(width, height),
+                        Name = "endBtn"
+                    };
+
+                    endBtn.Click += indexBtnClick;
+
+                    int x1 = buttons[0].Location.X - 70;
+                    int y1 = 30;
+                    int width1 = 65;
+                    int height1 = 35;
+                    startBtn = new Button()
+                    {
+                        Text = "...",
+                        BackColor = GetColor(9),
+                        Location = new Point(x1, y1),
+                        Size = new Size(width1, height1),
+                        Name = "startBtn"
+                    };
+                    startBtn.Click += indexBtnClick;
+                    if (totalCount > previewCount)
+                    {
+                        previewpanel.Controls.Add(endBtn);
+                        //buttons.Add(newBtn);
+                    }  
+
                 }
                 else if (previewCount > 2)
                 {
-                    for (int i = 0; i < previewCount / 2; i++)
-                    {
-                        newBtn = new Button()
-                        {
-                            Text = (i + 1) + "",
-                            BackColor = GetColor(i % 9),
-                            Location = new Point(x, y),
-                            Size = new Size(width, height)
-                        };
-                        newBtn.Click += btnClick;
-                        x += width + 5;
-                        previewpanel.Controls.Add(newBtn);
-                        buttons.Add(newBtn);
-                    }
-                    newBtn = new Button()
-                    {
-                        Text = ".....",
-                        BackColor = Color.White,
-                        //ForeColor = Color.White,
-                        Location = new Point(x, y),
-                        Size = new Size(width, height)
-                    };
-                    newBtn.Click += btnClick;
-                    x += width + 5;
-                    previewpanel.Controls.Add(newBtn);
-                    buttons.Add(newBtn);
-                    for (int i = totalCount - (previewCount - ((previewCount / 2) + 1)); i < totalCount; i++)
-                    {
-                        newBtn = new Button()
-                        {
-                            Text = (i + 1) + "",
-                            BackColor = GetColor(i % 8),
-                            Location = new Point(x, y),
-                            Size = new Size(width, height)
-                        };
-                        newBtn.Click += btnClick;
-                        x += width + 5;
-                        previewpanel.Controls.Add(newBtn);
-                        buttons.Add(newBtn);
-                    }
-
-                    
-                    
+                    //for (int i = 0; i < previewCount / 2; i++)
+                    //{
+                    //    newBtn = new Button()
+                    //    {
+                    //        Text = (i + 1) + "",
+                    //        BackColor = GetColor(i % 9),
+                    //        Location = new Point(x, y),
+                    //        Size = new Size(width, height)
+                    //    };
+                    //    newBtn.Click += btnClick;
+                    //    x += width + 5;
+                    //    previewpanel.Controls.Add(newBtn);
+                    //    buttons.Add(newBtn);
+                    //}
+                    //newBtn = new Button()
+                    //{
+                    //    Text = ".....",
+                    //    BackColor = Color.White,
+                    //    //ForeColor = Color.White,
+                    //    Location = new Point(x, y),
+                    //    Size = new Size(width, height)
+                    //};
+                    //newBtn.Click += btnClick;
+                    //x += width + 5;
+                    //previewpanel.Controls.Add(newBtn);
+                    //buttons.Add(newBtn);
+                    //for (int i = totalCount - (previewCount - ((previewCount / 2) + 1)); i < totalCount; i++)
+                    //{
+                    //    newBtn = new Button()
+                    //    {
+                    //        Text = (i + 1) + "",
+                    //        BackColor = GetColor(i % 8),
+                    //        Location = new Point(x, y),
+                    //        Size = new Size(width, height)
+                    //    };
+                    //    newBtn.Click += btnClick;
+                    //    x += width + 5;
+                    //    previewpanel.Controls.Add(newBtn);
+                    //    buttons.Add(newBtn);
+                    //}
 
 
+                    //if (int.Parse(buttons[0].Text)>1 && buttons.Count>0) {
+                    //    buttons[0].Text = "...";
+                    //    startIsPresent = true;
+                    //}
 
+                    //for (int i=0;i<previewCount-1;i++) {
+                    //    newBtn = new Button()
+                    //    {
+                    //        Text = (i + 1) + "",
+                    //        BackColor = GetColor(i % 9),
+                    //        Location = new Point(x, y),
+                    //        Size = new Size(width, height)
+                    //    };
+                    //    newBtn.Click += btnClick;
+                    //    x += width + 5;
+                    //    previewpanel.Controls.Add(newBtn);
+                    //    buttons.Add(newBtn);
+                    //}
+                    //newBtn = new Button()
+                    //{
+                    //    Text = "...",
+                    //    BackColor = GetColor(9),
+                    //    Location = new Point(x, y),
+                    //    Size = new Size(width, height)
+                    //};
+                    //previewpanel.Controls.Add(newBtn);
+                    //buttons.Add(newBtn);
                 }
                 else {
                     warnlbl.Text = "Invalid Limit";
@@ -202,16 +319,33 @@ namespace PageNation
                 if (btnIndex >= 0 && btnIndex < buttons.Count) {
                     buttons[btnIndex].Focus();
                 }
-                else if (btnIndex>=buttons.Count && int.Parse(buttons[buttons.Count-1].Text)+1<=totalCount) {
-                    
+                
+                
+                else if (btnIndex >= buttons.Count && int.Parse(buttons[buttons.Count - 1].Text) + 1 <= totalCount) {
+
                     foreach (Button btn in buttons) {
-                        btn.Text =(int.Parse(btn.Text)+1)+"";
+                        btn.Text = (int.Parse(btn.Text) + 1) + "";
                     }
-                    buttons[buttons.Count-1].Focus();
+                    buttons[buttons.Count - 1].Focus();
                     btnIndex--;
                 }
             }
-            previewTB.Text = "" + btnIndex;
+            if (buttons.Count > 0 && int.Parse(buttons[0].Text) > 1 && !startIsPresent) {
+                
+                
+                previewpanel.Controls.Add(startBtn);
+                startIsPresent = true;
+            }
+
+            if (int.Parse(buttons[buttons.Count - 1].Text) == totalCount)
+                endBtn.Visible = false;
+
+            //else if (startIsPresent) {
+            //    previewpanel.Controls.Remove(startBtn);
+            //    startIsPresent = false;
+            //}
+            //previewTB.Text = "" + btnIndex;
+            picfocus();
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
@@ -239,7 +373,27 @@ namespace PageNation
                     btnIndex++;
                 }
             }
-            previewTB.Text = "" + btnIndex;
+            if (int.Parse(buttons[0].Text) ==1)
+            {
+                previewpanel.Controls.Remove(startBtn);
+                startIsPresent = false ;
+            }
+            if (int.Parse(buttons[buttons.Count - 1].Text) != totalCount)
+                endBtn.Visible = true;
+            //previewTB.Text = "" + btnIndex;
+            picfocus();
+        }
+
+        private void picfocus() {
+            int id=0;
+            pictureBox?.Image?.Dispose();
+            foreach (Button btn in buttons) {
+                if (btn.Focused) {
+                    if (int.TryParse(btn.Text, out id)) ;
+                }
+            }
+            showLbl.Text = "Current Page Point is " + id;
+            pictureBox.Image = Image.FromFile(picData[id].Location);
         }
     }
 }
